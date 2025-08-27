@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Modifier l'URL de base</title>
+</head>
+<body>
+  <h1>Modifier l'URL de base</h1>
+  <input type="text" id="urlInput" placeholder="Entrez la nouvelle URL ici">
+  <button onclick="updateURL()">Valider</button>
+
+  <script>
+    console.log(1)
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('current-url', (event, currentURL) => {
+      const urlInput = document.getElementById('urlInput');
+      urlInput.value = currentURL;
+    });
+
+    function updateURL() {
+      const urlInput = document.getElementById('urlInput');
+      const newURL = urlInput.value;
+
+      
+      ipcRenderer.send('new-url', newURL);
+
+      
+      window.close();
+    }
+  </script>
+</body>
+</html>

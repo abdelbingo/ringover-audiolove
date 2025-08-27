@@ -1,0 +1,111 @@
+<!-- .
+  _____  _              ____                   
+ |  __ \(_)            / __ \                  
+ | |__) |_ _ __   __ _| |  | |_   _____ _ __   
+ |  _  /| | '_ \ / _` | |  | \ \ / / _ \ '__|  
+ | | \ \| | | | | (_| | |__| |\ V /  __/ |     
+ |_|  \_\_|_| |_|\__, |\____/  \_/ \___|_|     
+                  __/ |  HIRING !              
+                 |___/                         
+. -->
+<!doctype html>
+<html>
+    <head> 
+
+        
+        <meta charset="UTF-8">
+        <title>About RingOver</title>
+        <style>
+            * {
+                font-family: Calibri, Arial;
+                flex-direction: column;
+            }
+            p {
+                margin: 0;
+            }
+            body {
+                text-align: center;
+                display: flex;
+                justify-content: space-between;
+                height: calc(100vh - 20px);
+                margin: 0;
+                padding: 0 10px;
+            }
+            h3 {
+                margin: 0;
+            }
+            span{
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+            .left_side{
+                float: left;font-size: 12px;
+            }
+            .rigth_side{
+                float: right;font-size: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="padding: 10px;">
+            <img src="../assets/icons/tray.png" style="width: 100px; height: 100px">
+        </div>
+        <div></div>
+            <h3>RingOver Desktop App</h3>
+        </div>
+
+        <div>
+            <span class="left_side">Version : <span id="version_desk"></span></span>
+            <span class="rigth_side">Ringover : <span id="myringover_version"></span> </span>
+        </div><br>
+
+        <div>
+            <span  class="left_side">Chrome : <span id="chrome_version"></span> </span>
+            <span   class="rigth_side">Electron : <span id="electron_version"></span> </span>
+        </div><br>
+
+        <div>
+            <span  class="left_side">Os : <span id="os_version"></span> </span>
+        </div><br>
+        
+
+
+        
+        <div style="margin: 0 auto; font-size: 12px; font-weight: bold;">
+            © RingOver <span id="current_year"></span>
+        </div>
+    </body>
+    <script>
+        window.onload = _ => {
+            document.getElementById("current_year").innerHTML =    String(new Date().getFullYear()); 
+            let urlParams       = new URLSearchParams(location.search);
+            let myroversion     = JSON.stringify(urlParams.get('myringover'));
+            let getdata = myroversion.split(',');
+            getdata.forEach(element => {
+
+                let element_split = element.split('/');
+
+                switch (element_split[0].trim().replace('"','')) {
+                    case "electronVersion":
+                        document.getElementById("electron_version").innerHTML = element_split[1].trim().replace('"','');
+                        break;
+                        case "chromeVersion":
+                        document.getElementById("chrome_version").innerHTML = element_split[1].trim().replace('"','');
+                        break;
+                        case "myRingoverVersion":
+                        document.getElementById("myringover_version").innerHTML = element_split[1].trim().replace('"','');
+                        break;
+                        case "osVersion":
+                        document.getElementById("os_version").innerHTML = element_split[1].trim().replace('"','');
+                        break;
+                        case "version":
+                        document.getElementById("version_desk").innerHTML = element_split[1].trim().replace('"','');
+                        break;
+                    default:
+                        break;
+                }
+                
+            });
+        };
+    </script>
+</html>

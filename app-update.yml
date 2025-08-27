@@ -1,0 +1,5 @@
+provider: github
+token: 
+owner: ringover
+repo: ringover-desktop-v2
+updaterCacheDirName: electron-updater-private-updater
